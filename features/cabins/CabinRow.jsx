@@ -91,6 +91,8 @@ const CabinRow = ({ room }) => {
   const { image, name, maxCapacity, regularPrice, discount, description, id } =
     room;
 
+    console.log("Room data:", room.image);
+
   const handleDuplicate = () => {
     createNewRoom({
       name: `Copy ${room.name}`,

@@ -11,12 +11,11 @@ import ButtonText from "../../ui/ButtonText";
 import { useMoveBack } from "../../hooks/useMoveBack";
 import useBooking from "./useBooking";
 import Spinner from "../../ui/Spinner";
-import { HiArrowUpOnSquare } from "react-icons/hi2";
 import { useCheckout } from "../check-in-out/useCheckout";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import useDeleteBooking from "./useDeleteBooking";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -25,21 +24,19 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
-  const [isDeleted, setDeleted] = useState(false);
-
-  const { deleteSingleBooking } = useDeleteBooking();
-  const { checkout } = useCheckout();
   const { booking = {}, isBookingLoading, isError } = useBooking();
-  const { id: bookingId, status } = booking || {};
-  const navigate = useMoveBack();
+  const { checkout } = useCheckout();
 
+  const { id: bookingId, status } = booking || {};
+  const { deleteSingleBooking } = useDeleteBooking();
+
+  const navigate = useNavigate();
   const moveBack = useMoveBack();
 
   if (isError) {
     return <p>Not found</p>;
   }
 
-  if (isDeleted) return null;
   if (isBookingLoading) return <Spinner />;
 
   const statusToTagName = {
@@ -71,18 +68,27 @@ function BookingDetail() {
               Check out
             </Button>
           )}
+          {status === "unconfirmed" && (
+            <Button
+              $variation="primary"
+              $size="medium"
+              onClick={() => navigate(`/check-in/${bookingId}`)}
+            >
+              Check in
+            </Button>
+          )}
           <Modal.Open opens="delete">
-            <Button $variation="danger" $size="medium" onClick={moveBack}>
+            <Button $variation="danger" $size="medium">
               Delete Booking
             </Button>
           </Modal.Open>
           <Modal.Window name="delete">
             <ConfirmDelete
-              resourceName={booking.fullName}
+              resourceName={booking.id}
               onConfirm={() =>
                 deleteSingleBooking(bookingId, {
-                  onSuccess: () => { 
-                    navigate("/bookings");
+                  onSettled: () => {
+                    navigate(-1);
                   },
                 })
               }

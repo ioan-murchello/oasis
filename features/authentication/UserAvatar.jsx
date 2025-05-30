@@ -32,11 +32,11 @@ const UserAvatar = () => {
   return (
     <StyledUserAvatar>
       <p>
-        {matchMedia
-          ? user_metadata?.fullName && user_metadata?.fullName.length >= 15
+        {user_metadata?.fullName
+          ? user_metadata.fullName.length > 15 && matchMedia
             ? `${user_metadata.fullName.slice(0, 15)}...`
-            : user_metadata.fullName || "Guest"
-          : user_metadata?.fullName}
+            : user_metadata.fullName
+          : "Guest"}
       </p>
       <Avatar src={user_metadata?.avatar || defaultAvatar} alt="Avatar" />
     </StyledUserAvatar>

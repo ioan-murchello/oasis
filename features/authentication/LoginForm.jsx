@@ -11,11 +11,12 @@ const FullWidthCenter = styled.div`
   grid-column: 1 / -1;
   justify-self: center;
 `;
-
+ 
 function LoginForm() {
   const { loginFromQuery, isLogging } = useLogin();
-  const [email, setEmail] = useState("test@gmail.com");
+  const [email, setEmail] = useState("demouser@gmail.com");
   const [password, setPassword] = useState("11111111");
+ 
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,7 +24,7 @@ function LoginForm() {
 
     const safeEmail = sanitizeInput(email);
     const safePassword = sanitizeInput(password);
-    
+
     loginFromQuery({ email: safeEmail, password: safePassword });
   }
 
@@ -50,7 +51,11 @@ function LoginForm() {
         disabled={isLogging}
       />
       <FullWidthCenter>
-        <Button $variation="primary" $size="medium" disabled={isLogging}>
+        <Button
+          $variation="primary"
+          $size="medium"
+          disabled={isLogging}
+        >
           {isLogging ? <SpinnerMini /> : "Log in"}
         </Button>
       </FullWidthCenter>

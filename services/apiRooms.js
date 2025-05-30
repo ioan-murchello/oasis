@@ -17,6 +17,8 @@ export const deleteRoom = async (id) => {
 };
 
 export const createEditRoom = async (newRoom, id) => {
+
+  console.log(id, "id in createEditRoom");
   const hasImagePath = newRoom.image?.startsWith?.(supabaseUrl);
   const imageName = `${Math.random()}-${newRoom.image.name}`.replaceAll(
     "/",
@@ -24,10 +26,10 @@ export const createEditRoom = async (newRoom, id) => {
   );
   const imagePath = hasImagePath
     ? newRoom.image
-    : `${supabaseUrl}/storage/v1/object/public/cabinImages/${imageName}`;
+    : `${supabaseUrl}/storage/v1/object/public/cabinImages//${imageName}`;
 
   let query = supabase.from("cabins");
-
+  
   if (!id) {
     query = query.insert([{ ...newRoom, image: imagePath }]).select();
   }

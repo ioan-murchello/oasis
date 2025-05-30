@@ -7,8 +7,8 @@ const useDeleteBooking = () => {
   const { mutate: deleteSingleBooking, isLoading } = useMutation({
     mutationFn: (id) => deleteBooking(id),
     onSuccess: () => {
-      queryClient.invalidateQueries("bookings");
       toast.success("Booking deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["bookings"] });
     },
   });
   return { deleteSingleBooking, isLoading };

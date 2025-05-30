@@ -11,6 +11,7 @@ import { VscEye } from "react-icons/vsc";
 import { useState } from "react";
 import styled from "styled-components";
 import { sanitizeInput } from "../../utils/helpers";
+import { useGetUser } from "./useGetUser";
 
 const ButtonRow = styled.div`
   display: flex;
@@ -25,7 +26,8 @@ const ButtonRow = styled.div`
     flex-wrap: no-wrap;
   }
 
-  #eye, #eye2 {
+  #eye,
+  #eye2 {
     outline: none;
     border: none;
     background: transparent;
@@ -45,6 +47,9 @@ function UpdatePasswordForm() {
   const { errors } = formState;
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const {
+    user: { user_metadata },
+  } = useGetUser();
 
   const { updateUser, isUpdating } = useUpdateUser();
 
@@ -64,7 +69,7 @@ function UpdatePasswordForm() {
             id="password"
             $icon={<HiOutlineEye />}
             autoComplete="current-password"
-            disabled={isUpdating}
+            disabled={isUpdating || user_metadata?.fullName === "Demo User"}
             {...register("password", {
               required: "This field is required",
               minLength: {
@@ -95,7 +100,7 @@ function UpdatePasswordForm() {
             type={showConfirmPassword ? "text" : "password"}
             autoComplete="new-password"
             id="passwordConfirm"
-            disabled={isUpdating}
+            disabled={isUpdating || user_metadata?.fullName === "Demo User"}
             {...register("passwordConfirm", {
               required: "This field is required",
               validate: (value) =>

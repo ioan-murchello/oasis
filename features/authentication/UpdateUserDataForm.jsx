@@ -27,8 +27,8 @@ function UpdateUserDataForm() {
   } = useGetUser();
 
   const { updateUser, isUpdating } = useUpdateUser();
-  const currentFullName = user_metadata?.fullName || "";
-  const [fullName, setFullName] = useState(user_metadata?.fullName || "");
+  const currentFullName = user_metadata?.fullName || "Demo User";
+  const [fullName, setFullName] = useState(user_metadata?.fullName || "Demo User");
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState(
     user_metadata?.avatar || defaultAvatar
@@ -55,7 +55,7 @@ function UpdateUserDataForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <FormRow label="Email address">
-        <Input value={user_metadata.email} disabled />
+        <Input value={user_metadata.email || 'demouser@gmail.com'} disabled={fullName === 'Demo User'} />
       </FormRow>
       <FormRow label="Full name">
         <Input
@@ -63,13 +63,13 @@ function UpdateUserDataForm() {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           id="fullName"
-          disabled={isUpdating}
+          disabled={isUpdating || fullName === 'Demo User'}
         />
       </FormRow>
       <FormRow label="Avatar image">
         <FileInput
           id="avatar"
-          disabled={isUpdating}
+          disabled={isUpdating || fullName === 'Demo User'}
           accept="image/*"
           onChange={(e) => {
             const file = e.target.files[0];

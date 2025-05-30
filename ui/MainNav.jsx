@@ -56,7 +56,7 @@ const MainNav = () => {
     <nav>
       <NavList>
         <li>
-          <StyledLink to="/">
+          <StyledLink to="/dashboard">
             <GrHome />
             <span>Home</span>
           </StyledLink>
