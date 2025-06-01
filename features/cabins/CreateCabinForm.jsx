@@ -10,8 +10,11 @@ import FormRow from "../../ui/FormRow";
 import { useCreateRoom } from "./userCreateRoom";
 import { useEditRoom } from "./useEditRoom";
 import { sanitizeInput } from "../../utils/helpers";
+import { useEffect, useState } from "react";
 
 function CreateCabinForm({ roomToEdit = {}, closeModal }) {
+  const [imagePreview, setImagePreview] = useState(null);
+  const { editRoom, isEditing } = useEditRoom();
   const { id: editId, ...editValues } = roomToEdit;
   const isEditSession = Boolean(editId);
 
@@ -19,6 +22,7 @@ function CreateCabinForm({ roomToEdit = {}, closeModal }) {
     register,
     handleSubmit,
     reset,
+    watch,
     getValues,
     formState: { errors },
   } = useForm({
@@ -26,10 +30,24 @@ function CreateCabinForm({ roomToEdit = {}, closeModal }) {
   });
 
   const { isCreating, createNewRoom } = useCreateRoom();
-  const { isEditing, editRoom } = useEditRoom();
+
+  const image = watch("image");
+
+  useEffect(() => {
+    if (!image) return;
+
+    if (image instanceof FileList && image[0]) {
+      const objectUrl = URL.createObjectURL(image[0]);
+      setImagePreview(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    }
+
+     
+  }, [image]);
 
   function onSubmitForm(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
+
     if (isEditSession)
       editRoom(
         { newRoomData: { ...data, image }, id: editId },
@@ -104,7 +122,7 @@ function CreateCabinForm({ roomToEdit = {}, closeModal }) {
           {...register("discount", {
             required: "This field is required",
             validate: (value) =>
-              value <= getValues().regularPrice ||
+              value < getValues().regularPrice ||
               "Discount should be less then regular price",
             setValueAs: (value) => value && sanitizeInput(value),
           })}
@@ -116,6 +134,7 @@ function CreateCabinForm({ roomToEdit = {}, closeModal }) {
       >
         <Textarea
           disabled={isWorking}
+          
           id="description"
           {...register("description", {
             required: "This field is required",
@@ -126,18 +145,25 @@ function CreateCabinForm({ roomToEdit = {}, closeModal }) {
 
       <FormRow label="Room photo" error={errors?.image?.message}>
         <FileInput
-          disabled={isWorking}
           id="image"
           accept="image/*"
+          disabled={isWorking}
           {...register("image", {
             required: isEditSession ? false : "This field is required",
             setValueAs: (value) => value && sanitizeInput(value),
           })}
         />
+
+        {imagePreview && (
+          <img
+            src={imagePreview}
+            alt="Room preview"
+            style={{ width: "100px", height: "100px", marginTop: "1rem" }}
+          />
+        )} 
       </FormRow>
 
-      <FormRow>
-        {/* type is an HTML attribute! */}
+      <FormRow> 
         <Button
           $variation="danger"
           $size="medium"

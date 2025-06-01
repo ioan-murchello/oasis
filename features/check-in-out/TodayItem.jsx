@@ -46,7 +46,7 @@ const TodayItem = ({ activity }) => {
           $variation="primary"
           $size="small"
           as={Link}
-          to={`/checkin/${id}`}
+          to={`/check-in/${id}`}
         >
           check in
         </Button>

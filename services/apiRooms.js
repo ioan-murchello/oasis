@@ -16,9 +16,7 @@ export const deleteRoom = async (id) => {
   return data;
 };
 
-export const createEditRoom = async (newRoom, id) => {
-
-  console.log(id, "id in createEditRoom");
+export const createEditRoom = async (newRoom, id) => { 
   const hasImagePath = newRoom.image?.startsWith?.(supabaseUrl);
   const imageName = `${Math.random()}-${newRoom.image.name}`.replaceAll(
     "/",
@@ -29,7 +27,7 @@ export const createEditRoom = async (newRoom, id) => {
     : `${supabaseUrl}/storage/v1/object/public/cabinImages//${imageName}`;
 
   let query = supabase.from("cabins");
-  
+
   if (!id) {
     query = query.insert([{ ...newRoom, image: imagePath }]).select();
   }
@@ -55,6 +53,8 @@ export const createEditRoom = async (newRoom, id) => {
     .upload(imageName, newRoom.image);
 
   if (storageError) {
+    console.error("Storage Error:", storageError.message);
+
     await supabase.from("cabins").delete().eq("id", newRoom.id);
   }
 

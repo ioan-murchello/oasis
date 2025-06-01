@@ -28,7 +28,9 @@ function UpdateUserDataForm() {
 
   const { updateUser, isUpdating } = useUpdateUser();
   const currentFullName = user_metadata?.fullName || "Demo User";
-  const [fullName, setFullName] = useState(user_metadata?.fullName || "Demo User");
+  const [fullName, setFullName] = useState(
+    user_metadata?.fullName || "Demo User"
+  );
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState(
     user_metadata?.avatar || defaultAvatar
@@ -55,7 +57,10 @@ function UpdateUserDataForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <FormRow label="Email address">
-        <Input value={user_metadata.email || 'demouser@gmail.com'} disabled={fullName === 'Demo User'} />
+        <Input
+          value={user_metadata.email || "demouser@gmail.com"}
+          disabled={fullName === "Demo User"}
+        />
       </FormRow>
       <FormRow label="Full name">
         <Input
@@ -63,13 +68,13 @@ function UpdateUserDataForm() {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           id="fullName"
-          disabled={isUpdating || fullName === 'Demo User'}
+          disabled={isUpdating || fullName === "Demo User"}
         />
       </FormRow>
       <FormRow label="Avatar image">
         <FileInput
           id="avatar"
-          disabled={isUpdating || fullName === 'Demo User'}
+          disabled={isUpdating || fullName === "Demo User"}
           accept="image/*"
           onChange={(e) => {
             const file = e.target.files[0];
@@ -102,7 +107,11 @@ function UpdateUserDataForm() {
         >
           Cancel
         </Button>
-        <Button $size="medium" $variation="primary">
+        <Button
+          $size="medium"
+          $variation="primary"
+          disabled={isUpdating || fullName === "Demo User"}
+        >
           Update account
         </Button>
       </ButtonRow>

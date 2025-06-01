@@ -61,8 +61,7 @@ const Img = styled.img`
   width: 6.4rem;
   aspect-ratio: 3 / 2;
   object-fit: cover;
-  object-position: center;
-  /* transform: scale(1.5) translateX(-7px); */
+  object-position: center; 
 `;
 
 const Cabin = styled.div`
@@ -86,12 +85,9 @@ const Discount = styled.div`
 const CabinRow = ({ room }) => {
   const [show, setShow] = useState(false);
   const { isDeleting, removeRoom } = useRemoveRoom();
-  const { createNewRoom } = useCreateRoom();
-
+  const { createNewRoom } = useCreateRoom(); 
   const { image, name, maxCapacity, regularPrice, discount, description, id } =
     room;
-
-    console.log("Room data:", room.image);
 
   const handleDuplicate = () => {
     createNewRoom({
@@ -107,7 +103,7 @@ const CabinRow = ({ room }) => {
   return (
     <>
       <TableRow>
-        <Img src={room.image} />
+        <Img src={image} />
         <div>{name}</div>
         <Cabin>{maxCapacity}</Cabin>
         <Price>{formatCurrency(regularPrice)}</Price>

@@ -133,7 +133,11 @@ function UpdatePasswordForm() {
         >
           Cancel
         </Button>
-        <Button $size="medium" $variation="primary" disabled={isUpdating}>
+        <Button
+          $size="medium"
+          $variation="primary"
+          disabled={isUpdating || user_metadata?.fullName === "Demo User"}
+        >
           Update password
         </Button>
       </ButtonRow>

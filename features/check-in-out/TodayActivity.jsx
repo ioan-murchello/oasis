@@ -6,8 +6,7 @@ import { useTodayActivity } from "./useTodayActivity";
 import Spinner from "../../ui/Spinner";
 import TodayItem from "./TodayItem";
 
-const StyledToday = styled.div`
-  /* Box */
+const StyledToday = styled.div` 
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);

@@ -31,6 +31,7 @@ function SignupForm() {
           })}
           type="text"
           id="fullName"
+          autoComplete="username"
         />
       </FormRow>
 
@@ -46,6 +47,8 @@ function SignupForm() {
           })}
           type="email"
           id="email"
+          autoComplete="username"
+
         />
       </FormRow>
 
@@ -64,6 +67,7 @@ function SignupForm() {
           })}
           type="password"
           id="password"
+          autoComplete="new-password"
         />
       </FormRow>
 
@@ -77,6 +81,7 @@ function SignupForm() {
           })}
           type="password"
           id="passwordConfirm"
+          autoComplete="new-password"
         />
       </FormRow>
 

@@ -14,11 +14,14 @@ const StyledModal = styled.div`
   box-shadow: var(--shadow-lg);
   padding: 3.2rem 4rem;
   transition: all 0.5s;
-  max-width: 768px;
+  max-width: 840px;
   width: 100%;
 
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+
   @media (max-width: 600px) {
-    padding: 2.2rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;

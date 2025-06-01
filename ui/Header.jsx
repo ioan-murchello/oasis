@@ -15,6 +15,8 @@ const StyledHeader = styled.header`
 
   @media (max-width: 968px) {
     padding: 8px;
+  background-color: var(--color-grey-100);
+
   }
 `;
 

@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 
 const Form = styled.form`
-  overflow: hidden;
   font-size: 1.4rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2rem; 
+  
 
   ${(props) =>
     props.$type === "regular" &&

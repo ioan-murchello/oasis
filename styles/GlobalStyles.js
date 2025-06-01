@@ -59,7 +59,7 @@ const GlobalStyles = createGlobalStyle`
   --color-grey-400: #6b7280;
   --color-grey-500: #9ca3af;
   --color-grey-600: #d1d5db;
-  --color-grey-700: #697ebc;
+  --color-grey-700:rgb(210, 211, 212);
   --color-grey-800: #697ebc;
   --color-grey-900: #f9fafb;
   
@@ -84,8 +84,8 @@ const GlobalStyles = createGlobalStyle`
   --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.4);
   
-  --image-grayscale: 10%;
-  --image-opacity: 90%;
+  --image-grayscale: 1%;
+  /* --image-opacity: 90%; */
   }
 
     --border-radius-tiny: 3px;
@@ -179,10 +179,7 @@ const GlobalStyles = createGlobalStyle`
   }
   
   img {
-    max-width: 100%;
-  
-    /* For dark mode */
-    filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
+    max-width: 100%; 
   }
   
 `;

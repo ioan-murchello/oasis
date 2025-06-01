@@ -1,5 +1,6 @@
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { differenceInDays } from "date-fns";
+import supabase from "../services/supabase";
 
 // We want to make this function work for both Date objects and strings (which come from Supabase)
 export const subtractDates = (dateStr1, dateStr2) =>
@@ -39,3 +40,5 @@ export const sanitizeInput = (str) => {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 };
+
+
