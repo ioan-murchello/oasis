@@ -22,7 +22,7 @@ const StyledTodayItem = styled.li`
   @media (max-width: 600px) {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap: 1.2rem;
     padding: 1.2rem 0;
   }

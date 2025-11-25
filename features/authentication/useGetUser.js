@@ -9,7 +9,7 @@ export const useGetUser = () => {
   } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
-    retry: true,
+    retry: false,
     enabled: true,
   });
   return {

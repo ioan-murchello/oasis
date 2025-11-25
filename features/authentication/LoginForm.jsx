@@ -11,12 +11,29 @@ const FullWidthCenter = styled.div`
   grid-column: 1 / -1;
   justify-self: center;
 `;
- 
+
+const StyledForm = styled.form`
+  display: grid;
+  width: 100%;
+  max-width: 50rem;
+  padding: 2rem;;
+  grid-template-columns: 1fr ;
+  justify-self: stretch;
+  gap: 1.6rem; 
+  margin: 0 auto;
+
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr 1fr; 
+  }
+`;
+
+// eslint-disable-next-line no-unused-vars
+// Added eslint disable because label is needed for accessibility even if not used in JSX
+
 function LoginForm() {
   const { loginFromQuery, isLogging } = useLogin();
   const [email, setEmail] = useState("demouser@gmail.com");
   const [password, setPassword] = useState("11111111");
- 
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,7 +46,7 @@ function LoginForm() {
   }
 
   return (
-    <Form $type="loginForm" onSubmit={handleSubmit}>
+    <StyledForm $type="loginForm" onSubmit={handleSubmit}>
       <label htmlFor="email">Email address</label>
       <Input
         type="email"
@@ -51,15 +68,11 @@ function LoginForm() {
         disabled={isLogging}
       />
       <FullWidthCenter>
-        <Button
-          $variation="primary"
-          $size="medium"
-          disabled={isLogging}
-        >
+        <Button $variation="primary" $size="medium" disabled={isLogging}>
           {isLogging ? <SpinnerMini /> : "Log in"}
         </Button>
       </FullWidthCenter>
-    </Form>
+    </StyledForm>
   );
 }
 
