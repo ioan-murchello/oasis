@@ -13,7 +13,7 @@ export const useLogin = () => {
       toast.success(
         user.user.user_metadata?.fullName
           ? `Welcome back ${user.user.user_metadata?.fullName}!`
-          : "Welcome back!"
+          : "Welcome back!",
       );
       navigate("/dashboard", { replace: true });
     },
@@ -21,8 +21,9 @@ export const useLogin = () => {
     onError: (error) => {
       console.log("error", error);
       toast.error(
-        "Login failed. Email or Password are incorrect",
-        error.message
+        `Login failed. Email or Password are incorrect,
+        ${error.message}`,
+        { id: "error-login" },
       );
     },
   });

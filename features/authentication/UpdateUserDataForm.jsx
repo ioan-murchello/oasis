@@ -21,6 +21,14 @@ const ButtonRow = styled.div`
   }
 `;
 
+const DemoUser = styled.span`
+  font-size: 1.6rem;
+  font-style: italic;
+  padding: 1rem;
+  border: 1px solid rosybrown;
+  text-align: center;
+`
+
 function UpdateUserDataForm() {
   const {
     user: { user_metadata },
@@ -29,11 +37,11 @@ function UpdateUserDataForm() {
   const { updateUser, isUpdating } = useUpdateUser();
   const currentFullName = user_metadata?.fullName || "Demo User";
   const [fullName, setFullName] = useState(
-    user_metadata?.fullName || "Demo User"
+    user_metadata?.fullName || "Demo User",
   );
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState(
-    user_metadata?.avatar || defaultAvatar
+    user_metadata?.avatar || defaultAvatar,
   );
 
   function handleSubmit(e) {
@@ -45,7 +53,7 @@ function UpdateUserDataForm() {
         onSuccess: () => {
           setAvatar("");
         },
-      }
+      },
     );
   }
 
@@ -56,6 +64,7 @@ function UpdateUserDataForm() {
 
   return (
     <Form onSubmit={handleSubmit}>
+      {currentFullName === "Demo User" && <DemoUser>Demo user read only</DemoUser>}
       <FormRow label="Email address">
         <Input
           value={user_metadata.email || "demouser@gmail.com"}

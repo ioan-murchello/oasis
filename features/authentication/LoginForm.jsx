@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Button from "../../ui/Button";
-import Form from "../../ui/Form";
+import Button from "../../ui/Button"; 
 import Input from "../../ui/Input";
 import { useLogin } from "./useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
@@ -17,14 +16,9 @@ const StyledForm = styled.form`
   width: 100%;
   max-width: 50rem;
   padding: 2rem;;
-  grid-template-columns: 1fr ;
-  justify-self: stretch;
+  grid-template-columns: 1fr ; 
   gap: 1.6rem; 
   margin: 0 auto;
-
-  @media (min-width: 600px) {
-    grid-template-columns: 1fr 1fr; 
-  }
 `;
 
 // eslint-disable-next-line no-unused-vars
@@ -68,7 +62,7 @@ function LoginForm() {
         disabled={isLogging}
       />
       <FullWidthCenter>
-        <Button $variation="primary" $size="medium" disabled={isLogging}>
+        <Button $variation="primary" $size="large" disabled={isLogging}>
           {isLogging ? <SpinnerMini /> : "Log in"}
         </Button>
       </FullWidthCenter>
